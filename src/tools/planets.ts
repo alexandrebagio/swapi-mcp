@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { getPlanets } from "../service/planets";
+import { McpContent } from "../types";
 
 interface PlanetsToolParams {
   page: number;
@@ -17,6 +18,17 @@ export const PlanetsTool = {
     const { search, page } = parameters;
     const response = await getPlanets(search ?? "", page);
 
-    return response;
+    const content: McpContent[] = response.results.map((planet: any) => ({
+      type: "text",
+      text: planet.name,
+    }));
+
+    return {
+      content,
+      _meta: {
+        total: response.count,
+        page,
+      },
+    };
   },
 };
