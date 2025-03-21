@@ -49,7 +49,7 @@ export const StarShipTool = {
   },
   handler: async (parameters: { id: string }) => {
     const { id } = parameters;
-    const response = await fetch(`${SWAPI}startships/${id}`);
+    const response = await fetch(`${SWAPI}starships/${id}`);
     const data = await response.json();
 
     if (!response.ok) {
