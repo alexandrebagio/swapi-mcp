@@ -1,5 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { FilmsTool, FilmTool } from "./tools/films";
 import { PeoplesTool, PeopleTool } from "./tools/peoples";
 import { PlanetsTool, PlanetTool } from "./tools/planets";
 
@@ -38,6 +39,21 @@ server.tool(
   PeopleTool.description,
   PeopleTool.parameters,
   PeopleTool.handler
+);
+
+// Films
+server.tool(
+  FilmsTool.name,
+  FilmsTool.description,
+  FilmsTool.parameters,
+  FilmsTool.handler
+);
+
+server.tool(
+  FilmTool.name,
+  FilmTool.description,
+  FilmTool.parameters,
+  FilmTool.handler
 );
 
 async function main() {
