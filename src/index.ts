@@ -3,6 +3,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { FilmsTool, FilmTool } from "./tools/films";
 import { PeoplesTool, PeopleTool } from "./tools/peoples";
 import { PlanetsTool, PlanetTool } from "./tools/planets";
+import { SpeciesTool, SpecieTool } from "./tools/species";
 
 const server = new McpServer({
   name: "SWAPI",
@@ -54,6 +55,21 @@ server.tool(
   FilmTool.description,
   FilmTool.parameters,
   FilmTool.handler
+);
+
+// Species
+server.tool(
+  SpeciesTool.name,
+  SpeciesTool.description,
+  SpeciesTool.parameters,
+  SpeciesTool.handler
+);
+
+server.tool(
+  SpecieTool.name,
+  SpecieTool.description,
+  SpecieTool.parameters,
+  SpecieTool.handler
 );
 
 async function main() {
