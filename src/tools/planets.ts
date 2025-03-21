@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { getPlanets } from "../service/planets";
+import { SWAPI } from "../config";
 import { McpContent } from "../types";
 
 interface PlanetsToolParams {
@@ -16,19 +16,55 @@ export const PlanetsTool = {
   },
   handler: async (parameters: PlanetsToolParams) => {
     const { search, page } = parameters;
-    const response = await getPlanets(search ?? "", page);
+    const response = await fetch(
+      `${SWAPI}planets/?search=${search}&page=${page}`
+    );
 
-    const content: McpContent[] = response.results.map((planet: any) => ({
+    if (!response.ok) {
+      throw new Error("Something went wrong");
+    }
+
+    const data = await response.json();
+
+    const content: McpContent[] = data.results.map((planet: any) => ({
       type: "text",
-      text: planet.name,
+      text: JSON.stringify(planet),
     }));
 
     return {
       content,
       _meta: {
-        total: response.count,
+        total: data.count,
         page,
       },
+    };
+  },
+};
+
+export const PlanetTool = {
+  name: "planet",
+  description: "Get a details of a planet by id",
+  parameters: {
+    id: z.string().describe("Planet id"),
+  },
+  handler: async (parameters: { id: string }) => {
+    const { id } = parameters;
+    const response = await fetch(`${SWAPI}planets/${id}`);
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error("Something went wrong");
+    }
+
+    const content: McpContent[] = [
+      {
+        type: "text",
+        text: JSON.stringify(data),
+      },
+    ];
+
+    return {
+      content,
     };
   },
 };

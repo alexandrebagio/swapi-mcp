@@ -1,5 +1,5 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { PlanetsTool } from "./tools/planets";
+import { PlanetsTool, PlanetTool } from "./tools/planets";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
 const server = new McpServer({
@@ -12,6 +12,13 @@ server.tool(
   PlanetsTool.description,
   PlanetsTool.parameters,
   PlanetsTool.handler
+);
+
+server.tool(
+  PlanetTool.name,
+  PlanetTool.description,
+  PlanetTool.parameters,
+  PlanetTool.handler
 );
 
 async function main() {
