@@ -1,12 +1,16 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { PlanetsTool, PlanetTool } from "./tools/planets";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { PeoplesTool, PeopleTool } from "./tools/peoples";
+import { PlanetsTool, PlanetTool } from "./tools/planets";
 
 const server = new McpServer({
   name: "SWAPI",
   version: "1.0.0",
 });
 
+// Register tools
+
+// Planets
 server.tool(
   PlanetsTool.name,
   PlanetsTool.description,
@@ -19,6 +23,21 @@ server.tool(
   PlanetTool.description,
   PlanetTool.parameters,
   PlanetTool.handler
+);
+
+// Peoples
+server.tool(
+  PeoplesTool.name,
+  PeoplesTool.description,
+  PeoplesTool.parameters,
+  PeoplesTool.handler
+);
+
+server.tool(
+  PeopleTool.name,
+  PeopleTool.description,
+  PeopleTool.parameters,
+  PeopleTool.handler
 );
 
 async function main() {
