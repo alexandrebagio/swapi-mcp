@@ -26,9 +26,9 @@ export const PeoplesTool = {
 
     const data = await response.json();
 
-    const content: McpContent[] = data.results.map((planet: any) => ({
+    const content: McpContent[] = data.results.map((people: any) => ({
       type: "text",
-      text: JSON.stringify(planet),
+      text: JSON.stringify(people),
     }));
 
     return {
