@@ -4,6 +4,8 @@ import { FilmsTool, FilmTool } from "./tools/films";
 import { PeoplesTool, PeopleTool } from "./tools/peoples";
 import { PlanetsTool, PlanetTool } from "./tools/planets";
 import { SpeciesTool, SpecieTool } from "./tools/species";
+import { VehiclesTool, VehicleTool } from "./tools/vehicles";
+import { StarShipsTool, StarShipTool } from "./tools/starships";
 
 const server = new McpServer({
   name: "SWAPI",
@@ -70,6 +72,36 @@ server.tool(
   SpecieTool.description,
   SpecieTool.parameters,
   SpecieTool.handler
+);
+
+// Vehicles
+server.tool(
+  VehiclesTool.name,
+  VehiclesTool.description,
+  VehiclesTool.parameters,
+  VehiclesTool.handler
+);
+
+server.tool(
+  VehicleTool.name,
+  VehicleTool.description,
+  VehicleTool.parameters,
+  VehicleTool.handler
+);
+
+// Starships
+server.tool(
+  StarShipsTool.name,
+  StarShipsTool.description,
+  StarShipsTool.parameters,
+  StarShipsTool.handler
+);
+
+server.tool(
+  StarShipTool.name,
+  StarShipTool.description,
+  StarShipTool.parameters,
+  StarShipTool.handler
 );
 
 async function main() {
